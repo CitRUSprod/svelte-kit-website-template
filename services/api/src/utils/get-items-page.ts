@@ -1,45 +1,21 @@
 import { JsonObject } from "type-fest"
 
 interface ItemsData {
-    itemCount: number
+    totalItems: number
     items: Array<JsonObject>
 }
 
 export async function getItemsPage(
-    itemsPerPage: number,
-    pageNumber: number,
+    page: number,
+    perPage: number,
     getItemsData: (skip: number, take: number) => Promise<ItemsData>
 ) {
-    let perPage: number
-
-    if (itemsPerPage < 1) {
-        perPage = 1
-    } else if (itemsPerPage > 100) {
-        perPage = 100
-    } else {
-        perPage = itemsPerPage
-    }
-
-    let page: number
-
-    if (pageNumber < 1) {
-        page = 1
-    } else {
-        page = pageNumber
-    }
-
     const skip = perPage * (page - 1)
     const take = perPage
 
-    const { itemCount, items } = await getItemsData(skip, take)
+    const { totalItems, items } = await getItemsData(skip, take)
 
-    const pageCount = Math.ceil(itemCount / perPage)
+    const pages = Math.ceil(totalItems / perPage)
 
-    return {
-        pageNumber: page,
-        pageCount,
-        itemsPerPage: perPage,
-        itemCount,
-        items
-    }
+    return { page, pages, perPage, totalItems, items }
 }

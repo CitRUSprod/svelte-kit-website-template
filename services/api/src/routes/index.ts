@@ -1,14 +1,16 @@
 import { FastifyPluginCallback } from "fastify"
-import authRoute from "./auth"
-import usersRoute from "./users"
-import postsRoute from "./posts"
+import { authRoutes } from "./auth"
+import { usersRoutes } from "./users"
+import { rolesRoutes } from "./roles"
+import { permissionsRoutes } from "./permissions"
+import { postsRoutes } from "./posts"
 
-const route: FastifyPluginCallback = (app, opts, done) => {
-    app.register(authRoute, { prefix: "/auth" })
-    app.register(usersRoute, { prefix: "/users" })
-    app.register(postsRoute, { prefix: "/posts" })
+export const routes: FastifyPluginCallback = (app, options, done) => {
+    app.register(authRoutes, { prefix: "/auth" })
+        .register(permissionsRoutes, { prefix: "/permissions" })
+        .register(rolesRoutes, { prefix: "/roles" })
+        .register(usersRoutes, { prefix: "/users" })
+        .register(postsRoutes, { prefix: "/posts" })
 
     done()
 }
-
-export default route

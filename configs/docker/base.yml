@@ -1,41 +1,39 @@
 services:
     nginx:
-        image: nginx:1.21.4-alpine
+        image: nginx:1.21.6-alpine
         restart: always
-        environment:
-            WEBSITE_PORT: ${WEBSITE_PORT}
+        ports:
+            - ${WEBSITE_PORT}:6700
         volumes:
             - ../nginx:/etc/nginx/templates
     web:
         build:
             context: ../../services/web
             args:
-                NODE_IMAGE: node:16.13.1-alpine
+                NODE_IMAGE: node:18.1.0-alpine
+                VITE_TITLE: ${VITE_TITLE}
         restart: always
+        environment:
+            VITE_TITLE: ${VITE_TITLE}
     api:
         build:
             context: ../../services/api
             args:
-                NODE_IMAGE: node:16.13.1-alpine
-                POSTGRES_HOST: postgres
-                POSTGRES_USER: ${POSTGRES_USER}
-                POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-                POSTGRES_DB: ${POSTGRES_DB}
+                NODE_IMAGE: node:18.1.0-alpine
         restart: always
         environment:
-            WEBSITE_DOMAIN: ${WEBSITE_DOMAIN}
-            POSTGRES_HOST: postgres
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
             JWT_SECRET: ${JWT_SECRET}
             MAILER_HOST: ${MAILER_HOST}
             MAILER_PORT: ${MAILER_PORT}
-            MAILER_USER: ${MAILER_USER}
+            MAILER_EMAIL: ${MAILER_EMAIL}
             MAILER_PASSWORD: ${MAILER_PASSWORD}
             MAILER_NAME: ${MAILER_NAME}
+            EMAIL_CONFIRMATION_URL: ${EMAIL_CONFIRMATION_URL}
+            PASSWORD_RESET_URL: ${PASSWORD_RESET_URL}
+            ENABLE_DOCS: ${ENABLE_DOCS}
     postgres:
-        image: postgres:14.1-alpine
+        image: postgres:14.2-alpine
         restart: always
         ports:
             - ${POSTGRES_PORT}:5432

@@ -2,6 +2,6 @@
 
 SCRIPTS_DIR=$(dirname "$0")
 
-"$SCRIPTS_DIR"/run-mode dev "$@"
+"$SCRIPTS_DIR"/run dev "$@"
 
 exit 0

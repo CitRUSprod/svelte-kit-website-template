@@ -2,4 +2,4 @@
 
 . "$(dirname "$0")/_/husky.sh"
 
-pnpx --no-install commitlint --edit $1 -g ./configs/commits/commitlint.js
+pnpx commitlint --edit $1 -g ./configs/commits/commitlint.js

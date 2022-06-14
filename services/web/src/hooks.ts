@@ -1,66 +1,26 @@
-import { minify } from "html-minifier"
-import { dev } from "$app/env"
-import { cookies, fetchy } from "$lib/utils"
+import { defaultLocale, locales } from "$lib/locales"
+import { getLocaleAndRoute } from "$lib/utils"
 
-import type { Handle, GetSession } from "@sveltejs/kit"
+import type { Handle } from "@sveltejs/kit"
 
-const host = `${dev ? "localhost" : "nginx"}:6700`
+const supportedLocales = locales.get()
 
-export const handle: Handle = async ({ request, resolve }) => {
-    request.host = host
-    const headers = new Headers(request.headers)
+export const handle: Handle = async ({ event: e, resolve }) => {
+    const { locale, route } = getLocaleAndRoute(e.url.pathname)
 
-    let cookieArray: Array<string> = []
+    if (!locale) {
+        const lang = e.request.headers.get("accept-language") ?? ""
+        const localeCandidate = /^[a-z]{2}\b/.exec(lang)?.toString()
+        const isSupportedLocale = !!localeCandidate && supportedLocales.includes(localeCandidate)
 
-    try {
-        const res = await fetchy.get("/api/auth/user", { headers })
-        const data = await res.json()
+        const headers = new Headers()
+        headers.set("location", `/${isSupportedLocale ? localeCandidate : defaultLocale}${route}`)
 
-        request.locals.user = data
-
-        cookieArray = cookies.getSetFromHeaders(res.headers)
-    } catch {}
-
-    const cookie = cookies.merge(
-        headers.get("cookie")?.split("; "),
-        cookies.getKeyValuePairs(cookieArray)
-    )
-
-    const res = await resolve({
-        ...request,
-        headers: {
-            ...request.headers,
-            ...(cookie.length ? { cookie: cookie.join("; ") } : {})
-        }
-    })
-
-    if (!dev && res.headers["content-type"] === "text/html") {
-        res.body = minify(res.body as string, {
-            collapseBooleanAttributes: true,
-            collapseWhitespace: true,
-            conservativeCollapse: true,
-            decodeEntities: true,
-            html5: true,
-            minifyCSS: true,
-            minifyJS: true,
-            removeAttributeQuotes: true,
-            removeComments: true,
-            removeOptionalTags: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true
-        })
+        return new Response(undefined, { status: 301, headers })
     }
 
-    cookieArray = cookies.merge(cookieArray, cookies.getSetFromHeaders(res.headers))
+    const response = await resolve(e)
+    const body = await response.text()
 
-    return {
-        ...res,
-        headers: {
-            ...res.headers,
-            ...(cookieArray.length ? { "set-cookie": cookieArray } : {})
-        }
-    }
+    return new Response(body.replace(/<html.*>/, `<html lang="${locale}">`), response)
 }
-
-export const getSession: GetSession = req => ({ user: req.locals.user ?? null })

@@ -2,9 +2,11 @@ ARG NODE_IMAGE
 
 FROM ${NODE_IMAGE}
 
+ARG VITE_TITLE
+
 WORKDIR /app
 
-RUN npm i -g pnpm
+RUN npm add -g pnpm
 
 COPY package.json pnpm-lock.yaml ./
 

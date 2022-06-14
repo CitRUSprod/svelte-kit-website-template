@@ -6,48 +6,49 @@
         "dev": "svelte-kit dev -p 6701",
         "build": "svelte-kit build",
         "start": "PORT=6701 node dist",
-        "validate": "tsc --noEmit && svelte-check"
+        "validate": "svelte-check --tsconfig tsconfig.json"
+    },
+    "engines": {
+        "node": ">=18",
+        "pnpm": ">=7"
     },
     "postcss": {
         "plugins": {
-            "tailwindcss": {},
-            "postcss-nested": {}
+            "postcss-windicss": {
+                "config": "./windi.config.js"
+            }
         }
     },
-    "dependencies": {
-        "cookie": "0.4.1",
-        "html-minifier": "4.0.0",
-        "lodash-es": "4.17.21",
-        "luxon": "2.2.0",
-        "nprogress": "0.2.0",
-        "overlayscrollbars": "1.13.1",
-        "socket.io-client": "4.4.0",
-        "svelte-local-storage-store": "0.2.6",
-        "yup": "0.32.11"
-    },
     "devDependencies": {
-        "@iconify/json": "1.1.447",
-        "@sveltejs/adapter-node": "1.0.0-next.56",
-        "@sveltejs/kit": "1.0.0-next.202",
-        "@types/cookie": "0.4.1",
-        "@types/html-minifier": "4.0.2",
-        "@types/lodash-es": "4.17.5",
-        "@types/luxon": "2.0.8",
-        "@types/node": "17.0.5",
+        "@iconify/json": "2.1.61",
+        "@sveltejs/adapter-node": "1.0.0-next.78",
+        "@sveltejs/kit": "1.0.0-next.350",
+        "@types/node": "17.0.42",
         "@types/nprogress": "0.2.0",
-        "@types/overlayscrollbars": "1.12.1",
-        "@types/tailwindcss": "2.2.4",
-        "daisyui": "1.20.0",
-        "node-fetch": "3.1.0",
-        "postcss": "8.4.5",
-        "postcss-load-config": "3.1.0",
-        "postcss-nested": "5.0.6",
-        "svelte": "3.44.3",
-        "svelte-check": "2.2.11",
-        "svelte-preprocess": "4.10.1",
-        "tailwindcss": "3.0.7",
-        "type-fest": "2.8.0",
-        "typescript": "4.5.4",
-        "unplugin-icons": "0.13.0"
+        "node-fetch": "3.2.6",
+        "postcss": "8.4.14",
+        "postcss-html": "1.4.1",
+        "postcss-load-config": "4.0.1",
+        "postcss-windicss": "1.0.0",
+        "svelte": "3.48.0",
+        "svelte-check": "2.7.2",
+        "svelte-preprocess": "4.10.7",
+        "type-fest": "2.13.1",
+        "typescript": "4.7.3",
+        "unplugin-icons": "0.14.3",
+        "vite-plugin-dynamic-import": "0.9.9",
+        "windicss": "3.5.4"
+    },
+    "dependencies": {
+        "@segment/ajv-human-errors": "2.1.2",
+        "@sinclair/typebox": "0.23.5",
+        "ajv": "8.11.0",
+        "ajv-formats": "2.1.1",
+        "ajv-keywords": "5.1.0",
+        "classnames": "2.3.1",
+        "nprogress": "0.2.0",
+        "svelte-local-storage-store": "0.2.6",
+        "sveltekit-i18n": "2.2.2",
+        "tslib": "2.4.0"
     }
 }

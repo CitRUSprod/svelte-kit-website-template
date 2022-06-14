@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-docker rmi -f $(docker images -qf "dangling=true") > /dev/null 2>&1
+docker image prune -f > /dev/null
 
 exit 0

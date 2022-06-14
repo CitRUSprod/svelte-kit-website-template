@@ -2,7 +2,7 @@ import { get } from "svelte/store"
 import { writable } from "svelte-local-storage-store"
 
 function setDarkClass(value: boolean) {
-    document.documentElement.dataset.theme = value ? "dracula" : "light"
+    document.documentElement.classList[value ? "add" : "remove"]("dark")
 }
 
 const { subscribe, update } = writable("dark-theme", false)

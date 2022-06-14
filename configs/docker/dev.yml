@@ -3,10 +3,11 @@ services:
         extends:
             file: ./base.yml
             service: nginx
-        network_mode: host
+        extra_hosts:
+            - host.docker.internal:host-gateway
         environment:
-            WEB_HOST: localhost
-            API_HOST: localhost
+            WEB_HOST: host.docker.internal
+            API_HOST: host.docker.internal
     postgres:
         extends:
             file: ./base.yml

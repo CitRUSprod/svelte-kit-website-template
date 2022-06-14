@@ -3,8 +3,6 @@ services:
         extends:
             file: ./base.yml
             service: nginx
-        ports:
-            - ${WEBSITE_PORT}:${WEBSITE_PORT}
         environment:
             WEB_HOST: web
             API_HOST: api

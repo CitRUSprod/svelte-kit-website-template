@@ -1,0 +1,74 @@
+datasource db {
+    provider = "postgresql"
+    url = env("POSTGRES_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+enum Permission {
+    DeleteOtherUserPost
+    BanUser
+    CreateRole
+    GetOtherUserEmail
+    AssignRole
+}
+
+model Role {
+    id Int @id @default(autoincrement())
+    name String @unique
+    permissions Permission[]
+    protected Boolean @default(false)
+    users User[]
+}
+
+model User {
+    id Int @id @default(autoincrement())
+    email String @unique
+    username String @unique
+    password String
+    roleId Int @default(1)
+    role Role @relation(fields: [roleId], references: [id])
+    confirmedEmail Boolean @default(false)
+    banned Boolean @default(false)
+    registrationDate DateTime
+    refreshTokens RefreshToken[]
+    emailConfirmationToken EmailConfirmationToken?
+    passwordResetToken PasswordResetToken?
+    posts Post[]
+}
+
+model RefreshToken {
+    id Int @id @default(autoincrement())
+    token String @unique
+    userId Int
+    user User @relation(fields: [userId], references: [id])
+    creationDate DateTime
+}
+
+model EmailConfirmationToken {
+    id Int @id @default(autoincrement())
+    token String @unique
+    userId Int
+    user User @relation(fields: [userId], references: [id])
+    creationDate DateTime
+}
+
+model PasswordResetToken {
+    id Int @id @default(autoincrement())
+    token String @unique
+    userId Int
+    user User @relation(fields: [userId], references: [id])
+    creationDate DateTime
+}
+
+model Post {
+    id Int @id @default(autoincrement())
+    title String
+    content String
+    authorId Int
+    author User @relation(fields: [authorId], references: [id])
+    creationDate DateTime
+    editingDate DateTime?
+}

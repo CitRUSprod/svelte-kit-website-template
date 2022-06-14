@@ -1,8 +1,9 @@
 server {
-    listen ${WEBSITE_PORT};
+    listen 6700;
 
     location / {
         proxy_pass http://${WEB_HOST}:6701/;
+        proxy_set_header Host $http_host;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
         proxy_read_timeout 3600;
@@ -10,6 +11,7 @@ server {
 
     location /api/ {
         proxy_pass http://${API_HOST}:6702/;
+        proxy_set_header Host $http_host;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
         proxy_read_timeout 3600;

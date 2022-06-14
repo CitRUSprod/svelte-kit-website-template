@@ -4,6 +4,7 @@
         "target": "es2019",
         "module": "commonjs",
         "strict": true,
+        "importHelpers": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "sourceMap": true,

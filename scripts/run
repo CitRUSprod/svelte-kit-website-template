@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+SCRIPTS_DIR=$(dirname "$0")
+ROOT_DIR=$SCRIPTS_DIR/..
+DOCKER_CONFIGS_DIR=$ROOT_DIR/configs/docker
+
+ABS_ROOT_DIR=$(realpath "$ROOT_DIR")
+PROJECT_NAME=$(basename "$ABS_ROOT_DIR")
+
+MODE=$1
+
+shift
+
+"$SCRIPTS_DIR"/clone-env
+docker compose --env-file "$ABS_ROOT_DIR"/.env -f "$DOCKER_CONFIGS_DIR"/"$MODE".yml -p "$PROJECT_NAME"_"$MODE" "$@"
+"$SCRIPTS_DIR"/prune
+
+exit 0
