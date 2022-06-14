@@ -53,8 +53,6 @@ dependencies:
   ajv-formats: 2.1.1
   ajv-keywords: 5.1.0_ajv@8.11.0
   argon2: 0.28.5
-  dotenv: 16.0.1
-  dotenv-expand: 8.0.3
   fastify: 3.29.0
   fastify-plugin: 3.0.1
   fastify-socket.io: 3.0.0_socket.io@4.5.1
@@ -73,6 +71,8 @@ devDependencies:
   '@types/uuid': 8.3.4
   concurrently: 7.2.1
   defu: 6.0.0
+  dotenv: 16.0.1
+  dotenv-expand: 8.0.3
   esbuild: 0.14.43
   esbuild-plugin-clean: 0.9.0_esbuild@0.14.43
   esbuild-plugin-decorator: 0.4.0_sqrue3z5azgivm4nxygr2neu2a
@@ -828,12 +828,12 @@ packages:
   /dotenv-expand/8.0.3:
     resolution: {integrity: sha512-SErOMvge0ZUyWd5B0NXMQlDkN+8r+HhVUsxgOO7IoPDOdDRD2JjExpN6y3KnFR66jsJMwSn1pqIivhU5rcJiNg==}
     engines: {node: '>=12'}
-    dev: false
+    dev: true
 
   /dotenv/16.0.1:
     resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
     engines: {node: '>=12'}
-    dev: false
+    dev: true
 
   /ecdsa-sig-formatter/1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}

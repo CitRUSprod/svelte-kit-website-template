@@ -13,8 +13,6 @@ services:
                 NODE_IMAGE: node:18.1.0-alpine
                 VITE_TITLE: ${VITE_TITLE}
         restart: always
-        environment:
-            VITE_TITLE: ${VITE_TITLE}
     api:
         build:
             context: ../../services/api
