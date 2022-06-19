@@ -20,6 +20,7 @@ specifiers:
   concurrently: 7.2.1
   defu: 6.0.0
   dotenv: 16.0.1
+  dotenv-cli: 5.1.0
   dotenv-expand: 8.0.3
   esbuild: 0.14.43
   esbuild-plugin-clean: 0.9.0
@@ -72,6 +73,7 @@ devDependencies:
   concurrently: 7.2.1
   defu: 6.0.0
   dotenv: 16.0.1
+  dotenv-cli: 5.1.0
   dotenv-expand: 8.0.3
   esbuild: 0.14.43
   esbuild-plugin-clean: 0.9.0_esbuild@0.14.43
@@ -823,6 +825,16 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-type: 4.0.0
+    dev: true
+
+  /dotenv-cli/5.1.0:
+    resolution: {integrity: sha512-NoEZAlKo9WVrG0b3i9mBxdD6INdDuGqdgR74t68t8084QcI077/1MnPerRW1odl+9uULhcdnQp2U0pYVppKHOA==}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+      dotenv: 16.0.1
+      dotenv-expand: 8.0.3
+      minimist: 1.2.6
     dev: true
 
   /dotenv-expand/8.0.3:
@@ -1630,6 +1642,10 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
+
+  /minimist/1.2.6:
+    resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
+    dev: true
 
   /minipass/3.1.6:
     resolution: {integrity: sha512-rty5kpw9/z8SX9dmxblFA6edItUmwJgMeYDZRrwlIVN27i8gysGbznJwUggw2V/FVqFSDdWy040ZPS811DYAqQ==}

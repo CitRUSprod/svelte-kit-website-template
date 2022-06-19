@@ -6,12 +6,14 @@ specifiers:
   '@sinclair/typebox': 0.23.5
   '@sveltejs/adapter-node': 1.0.0-next.78
   '@sveltejs/kit': 1.0.0-next.350
+  '@types/cookie': 0.5.1
   '@types/node': 17.0.42
   '@types/nprogress': 0.2.0
   ajv: 8.11.0
   ajv-formats: 2.1.1
   ajv-keywords: 5.1.0
   classnames: 2.3.1
+  cookie: 0.5.0
   node-fetch: 3.2.6
   nprogress: 0.2.0
   postcss: 8.4.14
@@ -37,6 +39,7 @@ dependencies:
   ajv-formats: 2.1.1
   ajv-keywords: 5.1.0_ajv@8.11.0
   classnames: 2.3.1
+  cookie: 0.5.0
   nprogress: 0.2.0
   svelte-local-storage-store: 0.2.6_svelte@3.48.0
   sveltekit-i18n: 2.2.2_svelte@3.48.0
@@ -46,6 +49,7 @@ devDependencies:
   '@iconify/json': 2.1.61
   '@sveltejs/adapter-node': 1.0.0-next.78
   '@sveltejs/kit': 1.0.0-next.350_svelte@3.48.0
+  '@types/cookie': 0.5.1
   '@types/node': 17.0.42
   '@types/nprogress': 0.2.0
   node-fetch: 3.2.6
@@ -223,6 +227,10 @@ packages:
     resolution: {integrity: sha512-HheveklTjp3hxpYQhoHfyA6B4bQaUeSV5MQf2usIv/58UF2jY/YqhCAWj9bDBjufbuZc5pSz4BXvdX3WVT+viA==}
     dev: false
 
+  /@types/cookie/0.5.1:
+    resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
+    dev: true
+
   /@types/node/17.0.42:
     resolution: {integrity: sha512-Q5BPGyGKcvQgAMbsr7qEGN/kIPN6zZecYYABeTDBizOsau+2NMdSVTar9UQw21A2+JyA2KRNDYaYrPB0Rpk2oQ==}
     dev: true
@@ -344,6 +352,11 @@ packages:
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
+
+  /cookie/0.5.0:
+    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
+    engines: {node: '>= 0.6'}
+    dev: false
 
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}

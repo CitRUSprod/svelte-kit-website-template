@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Content, Button } from "$lib/components"
 
+    import { session } from "$app/stores"
     import { env } from "$lib/utils"
     import { toasts } from "$lib/stores"
     import { t } from "$lib/locales"
@@ -20,6 +21,9 @@
 <Content.Center>
     <div class="border-primary rounded-lg border text-center p-8">
         <h1>{env.VITE_TITLE}</h1>
+        {#if $session.user}
+            <h2>{$session.user.email}</h2>
+        {/if}
         <div class="flex justify-center mt-5">
             <Button type="primary" on:click={addOne}>
                 {$t("routes.home.clicked")}: {count}

@@ -2,7 +2,7 @@
     import { Icon, Button } from "$lib/components"
 
     import classNames from "classnames"
-    import { page } from "$app/stores"
+    import { page, session } from "$app/stores"
     import { darkTheme } from "$lib/stores"
     import { t, currentLocale, locales, localePath } from "$lib/locales"
     import { env } from "$lib/utils"
@@ -23,6 +23,11 @@
         <Button type="primary" href={$localePath("/posts")}>
             {$t("components.header.posts")}
         </Button>
+        {#if $session.user}
+            <Button type="primary" href={$localePath("/auth/logout")}>Выйти</Button>
+        {:else}
+            <Button type="primary" href={$localePath("/auth/login")}>Войти</Button>
+        {/if}
         <div class="flex items-center gap-1 mx-1">
             {#each $locales as locale, index (locale)}
                 <Button

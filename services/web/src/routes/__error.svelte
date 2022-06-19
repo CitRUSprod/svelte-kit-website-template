@@ -9,7 +9,7 @@
         await loadTranslations(locale!, "error")
 
         return {
-            stuff: { route }
+            stuff: { locale, route }
         }
     }
 </script>
