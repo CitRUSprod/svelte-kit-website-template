@@ -13,7 +13,6 @@ declare namespace App {
     }
 
     interface Stuff {
-        locale: string
         route: string
     }
 }

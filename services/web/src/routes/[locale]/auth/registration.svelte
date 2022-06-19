@@ -3,8 +3,8 @@
 
     import type { Load } from "@sveltejs/kit"
 
-    export const load: Load = ({ session, stuff }) => {
-        if (session.user) return createRedirectResponse(`/${stuff.locale!}`)
+    export const load: Load = ({ session, params }) => {
+        if (session.user) return createRedirectResponse(`/${params.locale}`)
         return {}
     }
 </script>
