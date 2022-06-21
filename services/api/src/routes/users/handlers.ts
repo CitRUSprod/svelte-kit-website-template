@@ -1,7 +1,7 @@
 import { BadRequest } from "http-errors"
 import { Prisma, Permission } from "@prisma/client"
 import { getItemsPage, models } from "$/utils"
-import { PartialUserData, RouteHandler } from "$/types"
+import { UserData, PartialUserData, RouteHandler } from "$/types"
 import * as schemas from "./schemas"
 
 export const getUsers: RouteHandler<{ query: schemas.GetUsersQuery }> = async (app, { query }) => {
@@ -26,9 +26,12 @@ export const getUsers: RouteHandler<{ query: schemas.GetUsersQuery }> = async (a
     return { payload: page }
 }
 
-export const getUser: RouteHandler<{ params: schemas.GetUserParams }> = async (app, { params }) => {
+export const getUser: RouteHandler<{ userData: UserData; params: schemas.GetUserParams }> = async (
+    app,
+    { userData, params }
+) => {
     const user: PartialUserData = await models.user.get(app, params.id)
-    if (!user.role.permissions.includes(Permission.GetOtherUserEmail)) delete user.email
+    if (!userData.role.permissions.includes(Permission.GetOtherUserEmail)) delete user.email
     return { payload: models.user.dto(user) }
 }
 
