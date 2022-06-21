@@ -21,12 +21,18 @@
 </script>
 
 <script lang="ts">
-    import { Content } from "$lib/components"
+    import { Content, Button } from "$lib/components"
+
+    import { localePath } from "$lib/locales"
 
     import type { User } from "$lib/types"
 
     export let user: User
 </script>
+
+<svelte:head>
+    <title>Профиль</title>
+</svelte:head>
 
 <Content.Default title="Профиль">
     <div class="flex flex-col gap-2">
@@ -37,5 +43,8 @@
         <div><b>Banned:</b> {user.banned ? "Yes" : "No"}</div>
         <div><b>Role:</b> {user.role.name}</div>
         <div><b>Registration date:</b> {dt.getFullDateAndTime(user.registrationDate)}</div>
+        <div>
+            <Button type="warning" href={$localePath("/users/edit")}>Редактировать</Button>
+        </div>
     </div>
 </Content.Default>

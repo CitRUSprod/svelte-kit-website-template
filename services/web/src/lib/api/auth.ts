@@ -41,6 +41,22 @@ export async function getMe(options: ApiOptions = {}): Promise<ApiResponse<User>
     return [data as any, errorData, info]
 }
 
+interface UpdateMeData {
+    email?: string
+    username?: string
+}
+
+export async function updateMe(options: ApiOptions<UpdateMeData>): Promise<ApiResponse<User>> {
+    const [data, errorData, info] = await fetchy.wrapped.patch("/api/auth/me", {
+        ...options.fetchy,
+        json: {
+            email: options.data.email,
+            username: options.data.username
+        }
+    })
+    return [data as any, errorData, info]
+}
+
 export async function logout(options: ApiOptions = {}): Promise<ApiResponse<undefined>> {
     const [, errorData, info] = await fetchy.wrapped.post("/api/auth/logout", options.fetchy)
     return [undefined, errorData, info]
