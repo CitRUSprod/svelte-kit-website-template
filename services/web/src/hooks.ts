@@ -22,7 +22,7 @@ export const handle: Handle = async ({ event: e, resolve }) => {
 
     let cookieArray: Array<string> = []
 
-    const [user, errorData, info] = await api.auth.getMe({ headers: e.request.headers })
+    const [user, errorData, info] = await api.auth.getMe({ fetchy: { headers: e.request.headers } })
 
     if (!errorData) {
         e.locals.user = user

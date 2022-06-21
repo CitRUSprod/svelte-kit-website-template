@@ -1,5 +1,10 @@
+import type { LoadEvent } from "@sveltejs/kit"
+
 export type ApiOptions<T = undefined> = {
-    headers?: Headers
+    fetchy?: {
+        headers?: Headers
+        fetch?: LoadEvent["fetch"]
+    }
 } & (T extends undefined ? object : { data: T })
 
 export interface ApiError {

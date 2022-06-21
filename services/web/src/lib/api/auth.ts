@@ -10,7 +10,7 @@ interface RegisterData {
 
 export async function register(options: ApiOptions<RegisterData>): Promise<ApiResponse<undefined>> {
     const [, errorData, info] = await fetchy.wrapped.post("/api/auth/register", {
-        headers: options.headers,
+        ...options.fetchy,
         json: {
             email: options.data.email,
             username: options.data.username,
@@ -27,7 +27,7 @@ interface LoginData {
 
 export async function login(options: ApiOptions<LoginData>): Promise<ApiResponse<undefined>> {
     const [, errorData, info] = await fetchy.wrapped.post("/api/auth/login", {
-        headers: options.headers,
+        ...options.fetchy,
         json: {
             email: options.data.email,
             password: options.data.password
@@ -37,15 +37,11 @@ export async function login(options: ApiOptions<LoginData>): Promise<ApiResponse
 }
 
 export async function getMe(options: ApiOptions = {}): Promise<ApiResponse<User>> {
-    const [data, errorData, info] = await fetchy.wrapped.get("/api/auth/me", {
-        headers: options.headers
-    })
+    const [data, errorData, info] = await fetchy.wrapped.get("/api/auth/me", options.fetchy)
     return [data as any, errorData, info]
 }
 
 export async function logout(options: ApiOptions = {}): Promise<ApiResponse<undefined>> {
-    const [, errorData, info] = await fetchy.wrapped.post("/api/auth/logout", {
-        headers: options.headers
-    })
+    const [, errorData, info] = await fetchy.wrapped.post("/api/auth/logout", options.fetchy)
     return [undefined, errorData, info]
 }

@@ -4,11 +4,12 @@ import { browser, dev } from "$app/env"
 import * as cookies from "./cookies"
 
 import type { JsonObject } from "type-fest"
+import type { LoadEvent } from "@sveltejs/kit"
 import type { ApiResponse } from "$lib/types"
 
 interface Options {
     headers?: Headers
-    fetch?: typeof fetch
+    fetch?: LoadEvent["fetch"]
     searchParams?: URLSearchParams
     json?: JsonObject
 }

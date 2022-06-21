@@ -15,6 +15,11 @@
         </h2>
     </div>
     <div class="flex flex-1 flex-wrap justify-end gap-2">
+        {#if $session.user}
+            <Button type="primary" href={$localePath(`/users/${String($session.user.id)}`)}>
+                Профиль
+            </Button>
+        {/if}
         <Button type="primary" href={$localePath("/todo")}>{$t("components.header.todo")}</Button>
         <Button type="primary" href={$localePath("/lorem")}>Lorem</Button>
         <Button type="primary" href={$localePath("/simple-layout")}>
